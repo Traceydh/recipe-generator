@@ -16,14 +16,9 @@ function getRecipes() {
 	.then(response => response.json())
 	.then(data => {
         console.log(data)
-
         for (let i = 0; i < data.hits.length; i++) {
             createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url)
         }
-
-
-
-
     })
 	.catch(err => console.error(err));
 }
@@ -55,4 +50,3 @@ function createRecipeCard(title, image, url){
     cardLink.href =  url;
     cardLink.textContent = 'Get Recipe'
 }
-
