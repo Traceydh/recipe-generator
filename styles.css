@@ -6,3 +6,7 @@
 .input-group {
     max-width: 60%;
 }
+
+.card {
+    width: 18rem;
+}

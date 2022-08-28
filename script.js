@@ -10,6 +10,7 @@ const APP_KEYS = '1ace64e82efde8a6cdfceeaee1b79d84';
 const URL = `https://api.edamam.com/api/recipes/v2?type=public&q=`;
 
 function getRecipes() {
+
     let ingredient = document.querySelector('#ingredient').value;
 
     fetch(`${URL}${ingredient}&app_id=${APP_ID}&app_key=${APP_KEYS}`)
@@ -20,3 +21,26 @@ function getRecipes() {
 	.catch(err => console.error(err));
 }
 
+function createRecipeCard(){
+    const card = document.createElement('div');
+    const cardImage = document.createElement('img');
+    const cardBody = document.createElement('div');
+    const cardTitle = document.createElement('h5');
+    const cardText = document.createElement('p');
+    const cardLink = document.createElement('a');
+
+    card.classList.add('card');
+    cardImage.classList.add('card-img-top');
+    cardBody.classList.add('card-body');
+    cardTitle.classList.add('card-title');
+    cardText.classList.add('card-text');
+    cardLink.classList.add('btn-primary', 'btn');
+
+    card.append(cardImage);
+    card.append(cardBody);
+    card.append(cardTitle);
+    card.append(cardText);
+    card.append(cardLink);
+    recipeContainer.append(card);
+
+}
