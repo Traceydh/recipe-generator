@@ -16,6 +16,7 @@ function getRecipes() {
 	.then(response => response.json())
 	.then(data => {
         console.log(data)
+        removeCards();
         for (let i = 0; i < data.hits.length; i++) {
             createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url)
         }
@@ -49,4 +50,15 @@ function createRecipeCard(title, image, url){
     cardImage.src = image;
     cardLink.href =  url;
     cardLink.textContent = 'Get Recipe'
+}
+
+function removeCards() {
+    let cards = document.querySelectorAll('card');
+    if (cards == undefined) {
+        return
+    } else {
+        cards.forEach((card) => {
+            recipeContainer.remove(card);
+        })
+    }
 }
