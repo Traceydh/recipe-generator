@@ -4,28 +4,19 @@ const recipeContainer = document.querySelector('#recipes');
 button.addEventListener('click', getRecipes);
 
 
+//API
+const APP_ID = '23647cb2';
+const APP_KEYS = '1ace64e82efde8a6cdfceeaee1b79d84';
+const URL = `https://api.edamam.com/api/recipes/v2?type=public&q=pizza&app_id=${APP_ID}&app_key=${APP_KEYS}`;
+
 function getRecipes() {
     let ingredient = document.querySelector('#ingredient').value;
-    console.log(ingredient);
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+
+    fetch(URL)
 	.then(response => response.json())
 	.then(data => {
         console.log(data)
-        //if user typos or no recipes in database
-        if (data.meals === null) {
-            console.log('no recipes yet ')
-            return
-        }
-
-        createRecipeInDom(data.meals);
     })
 	.catch(err => console.error(err));
-}
-
-
-function createRecipeInDom(recipe) {
-    for (let i = 0; i < recipe.length; i ++) {
-        recipeContainer.textContent += recipe[i].strMeal;
-    }
 }
 
