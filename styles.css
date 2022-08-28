@@ -3,4 +3,6 @@
     box-sizing: border-box;
 }
 
-/*tablets width 801*/
+.input-group {
+    max-width: 60%;
+}
