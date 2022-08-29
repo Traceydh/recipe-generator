@@ -73,7 +73,6 @@ function createIngredientCard(ing) {
     if (ing === '') {
         return
     }
-
     const ingredientContainer = document.querySelector('.ingredients');
     const card = document.createElement('div');
     card.classList.add('ingredient-card');
@@ -82,12 +81,20 @@ function createIngredientCard(ing) {
     text.textContent = ing; 
 
     const removeButton = document.createElement('button');
-    removeButton.textContent = 'x';
-
+    removeButton.classList.add('remove-button');
+    removeButton.innerHTML = "&times;";
+    removeButton.addEventListener('click', removeIngredient);
 
     card.append(removeButton);
     card.append(text);
 
     ingredientContainer.append(card);
+}
 
+function removeIngredient() {
+    const ingredientContainer = document.querySelector('.ingredients');
+    let textToDelete = this.nextElementSibling.textContent;
+    console.log(this.parentElement);
+    ingredientList = ingredientList.replace(`${textToDelete} `, '')
+    console.log(ingredientList)
 }

@@ -79,7 +79,21 @@ header h1 {
 
 .ingredient-card {
     background-color: red;
-    padding: 0.5rem 2rem; 
+    padding: 0.8rem 2rem; 
     border-radius: 0.9rem;
     text-align: center;
+    position: relative;
+}
+
+.remove-button {
+    border-style: none;
+    border-radius: 0.9rem;
+    background-color: rgba(0,0,0,0);
+    position: absolute;
+    right: 2px;
+    top: 1.5px;
+}
+
+.remove-button:hover {
+    color: rebeccapurple;
 }
