@@ -125,7 +125,31 @@ function favouriteRecipe() {
     localStorage.setItem('recipeObject', recipeObjectAsString);
     let revertRecipeStringToNormal = JSON.parse(localStorage.getItem('recipeObject'));
     console.log(revertRecipeStringToNormal);
+
+    createFavouriteRecipe(recipeObject.title, recipeObject.image, recipeObject.url)
 }
 
+function createFavouriteRecipe(title, image, url) {
+    const container = document.querySelector('.modal-body');
+    console.log(container);
 
-//Modal from bootstrap
+    const card = document.createElement('div');
+    const cardImage = document.createElement('img');
+    const cardTitle = document.createElement('h5');
+    const cardLink = document.createElement('a');
+
+    card.classList.add('card', 'remove');
+    cardImage.classList.add('card-img-top');
+    cardTitle.classList.add('card-title');
+    cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
+
+    card.append(cardImage);
+    card.append(cardTitle);
+    card.append(cardLink);
+    container.append(card);
+
+    cardTitle.textContent = title;
+    cardImage.src = image;
+    cardLink.href =  url;
+    cardLink.textContent = 'Get Recipe'
+}
