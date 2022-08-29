@@ -53,12 +53,6 @@ function createRecipeCard(title, image, url){
 }
 
 function removeCards() {
-    let cards = document.querySelectorAll('card');
-    if (cards == undefined) {
-        return
-    } else {
-        cards.forEach((card) => {
-            recipeContainer.remove(card);
-        })
-    }
+    let cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.remove());
 }
