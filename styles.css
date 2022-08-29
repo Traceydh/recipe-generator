@@ -63,15 +63,17 @@ header h1 {
     right: 0.8rem;
     top: 0.7rem;
     width: 1.25rem;   
-    content: url(images/love.png)
+    content: url(images/love.png);
 }
 
 .favourite {
     position: absolute;
-    right: 0.67rem;
-    top: 0.55rem;
-    width: 1.5rem;   
-    content: url(images/heart.png)
+    right: 0.6rem;
+    top: 0.5rem;
+    width: 1.6rem;   
+    content: url(images/heart.png);
+
+    transition: 300ms;
 }
 
 .btn {
