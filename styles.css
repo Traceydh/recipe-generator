@@ -55,11 +55,31 @@ header h1 {
     margin: 0 auto;
 }
 
-#btn {
+.btn {
     background-color: white;
 }
 
-#btn:hover {
-    color: black;
+.ingredient-container {
+    max-width: 80%;
+    margin: 0 auto;
+    align-items: center;
+    padding: 2rem;
+    justify-content: space-around;
+}
+
+.ingredients {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+}
+
+
+.ingredient-card {
     background-color: red;
+    padding: 0.5rem 2rem; 
+    border-radius: 0.9rem;
+    text-align: center;
 }
