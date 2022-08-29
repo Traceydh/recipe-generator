@@ -115,18 +115,14 @@ function favouriteRecipe() {
     let url = (this.parentElement).querySelector('a').href;
     this.classList.toggle('favourite');
     console.log(this.parentElement, title, image, url);
+
+    let recipeObject = {
+        title: title,
+        image: image,
+        url: url
+    }
+    let recipeObjectAsString = JSON.stringify(recipeObject);
+    localStorage.setItem('recipeObject', recipeObjectAsString);
+    let revertRecipeStringToNormal = JSON.parse(localStorage.getItem('recipeObject'));
+    console.log(revertRecipeStringToNormal);
 }
-
-//local storage can only store strings
-let recipeObject = {
-    title: 'tracey',
-    image: 'help',
-    url: ''
-}
-
-let objectString = JSON.stringify(recipeObject);
-
-localStorage.setItem('object', objectString);
-
-let object_unstring = JSON.parse(localStorage.getItem('object'));
-console.log(objectString, object_unstring)
