@@ -67,17 +67,27 @@ function createRecipeCard(title, image, url){
 function removeCards() {
     let cards = document.querySelectorAll('.remove');
     cards.forEach(card => card.remove());
-
-    ingredientList = '';
-
-    
 }
 
 function createIngredientCard(ing) {
-    const card = document.createElement('div');
+    if (ing === '') {
+        return
+    }
+
     const ingredientContainer = document.querySelector('.ingredients');
+    const card = document.createElement('div');
     card.classList.add('ingredient-card');
 
+    const text = document.createElement('div');
+    text.textContent = ing; 
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'x';
+
+
+    card.append(removeButton);
+    card.append(text);
+
     ingredientContainer.append(card);
-    card.textContent = ing; 
+
 }
