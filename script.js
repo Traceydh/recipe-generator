@@ -3,6 +3,16 @@ let button = document.querySelector('#find');
 const recipeContainer = document.querySelector('#recipes');
 button.addEventListener('click', getRecipes);
 
+//Set ingredient list 
+let ingredientList = '';
+
+let addIngredient = document.querySelector('#add');
+addIngredient.addEventListener('click', listOfIngredients);
+
+function listOfIngredients() {
+    let ingredient = document.querySelector('#ingredient').value;
+    ingredientList += `${ingredient} `;
+}
 
 //API
 const APP_ID = '23647cb2';
