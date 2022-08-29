@@ -7,9 +7,9 @@ button.addEventListener('click', getRecipes);
 let ingredientList = '';
 
 let addIngredient = document.querySelector('#add');
-addIngredient.addEventListener('click', listOfIngredients);
+addIngredient.addEventListener('click', concatonateIngredients);
 
-function listOfIngredients() {
+function concatonateIngredients() {
     let ingredient = document.querySelector('#ingredient').value;
     ingredientList += `${ingredient} `;
 }
