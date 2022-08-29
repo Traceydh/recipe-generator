@@ -1,3 +1,6 @@
+//empty array to store favourite recipes
+let favouriteRecipes = [];
+
 //Select button 
 let button = document.querySelector('#find');
 const recipeContainer = document.querySelector('#recipes');
@@ -32,7 +35,6 @@ function getRecipes() {
     fetch(`${URL}${ingredientList}&app_id=${APP_ID}&app_key=${APP_KEYS}`)
 	.then(response => response.json())
 	.then(data => {
-        console.log(data)
         removeCards();
         for (let i = 0; i < data.hits.length; i++) {
             createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url)
@@ -103,7 +105,6 @@ function createIngredientCard(ing) {
 }
 
 function removeIngredient() {
-    console.log(this);
     let textToDelete = this.nextElementSibling.textContent;
     this.parentElement.remove();
     ingredientList = ingredientList.replace(`${textToDelete} `, '')
@@ -114,23 +115,27 @@ function favouriteRecipe() {
     let image = (this.parentElement).querySelector('img').src;
     let url = (this.parentElement).querySelector('a').href;
     this.classList.toggle('favourite');
-    console.log(this.parentElement, title, image, url);
 
-    let recipeObject = {
+    const recipeObject = {
         title: title,
         image: image,
         url: url
     }
+    favouriteRecipes.push(recipeObject);
 
-    let recipeObjectAsString = JSON.stringify(recipeObject);
-    localStorage.setItem('recipeObject', recipeObjectAsString);
 
-    createFavouriteRecipe(recipeObject.title, recipeObject.image, recipeObject.url)
+    //let recipeObjectAsString = JSON.stringify(recipeObject);
+    //localStorage.setItem(`recipeObject${i}`,recipeObjectAsString)
+       // createFavouriteRecipe(recipeObject.title, recipeObject.image, recipeObject.url)
+
+    //loop through array and for each recipe store in local storage 
+    for (let i = 0; i < favouriteRecipes.length; i++) {
+        console.log(favouriteRecipes[i])
+    }
 }
 
 function createFavouriteRecipe(title, image, url) {
     const container = document.querySelector('.modal-body');
-    console.log(container);
 
     const card = document.createElement('div');
     const cardImage = document.createElement('img');
@@ -154,6 +159,9 @@ function createFavouriteRecipe(title, image, url) {
 }
 
 //load recipeObjects in local storage into favourite recipes 
+//get from local storage 
 let recipeFavourite = localStorage.getItem('recipeObject');
+//convert to normal object 
 let revertRecipeStringToNormal = JSON.parse(localStorage.getItem('recipeObject'));
+//generate image card in modal
 createFavouriteRecipe(revertRecipeStringToNormal.title, revertRecipeStringToNormal.image, revertRecipeStringToNormal.url)
