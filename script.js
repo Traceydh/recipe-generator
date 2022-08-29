@@ -9,9 +9,12 @@ let ingredientList = '';
 let addIngredient = document.querySelector('#add');
 addIngredient.addEventListener('click', concatonateIngredients);
 
+document.querySelector('#ingredient').value.textContent = 'wtf';
+
 function concatonateIngredients() {
-    let ingredient = document.querySelector('#ingredient').value;
-    createIngredientCard(ingredient);
+    let ingredient = document.querySelector('#ingredient');
+    createIngredientCard(ingredient.value);
+    ingredient.value = '';
     ingredientList += `${ingredient} `;
 }
 
