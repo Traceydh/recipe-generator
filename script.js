@@ -1,5 +1,6 @@
 //empty array to store favourite recipes
-let favouriteRecipes = [];
+let favouriteRecipesObject = [];
+let favouriteRecipesString = [];
 
 //Select button 
 let button = document.querySelector('#find');
@@ -35,7 +36,7 @@ function getRecipes() {
     fetch(`${URL}${ingredientList}&app_id=${APP_ID}&app_key=${APP_KEYS}`)
 	.then(response => response.json())
 	.then(data => {
-        removeCards();
+        removeCards('.remove');
         for (let i = 0; i < data.hits.length; i++) {
             createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url)
         }
@@ -77,8 +78,8 @@ function createRecipeCard(title, image, url){
     cardLink.textContent = 'Get Recipe'
 }
 
-function removeCards() {
-    let cards = document.querySelectorAll('.remove');
+function removeCards(remove) {
+    let cards = document.querySelectorAll(remove);
     cards.forEach(card => card.remove());
 }
 
@@ -121,17 +122,28 @@ function favouriteRecipe() {
         image: image,
         url: url
     }
-    favouriteRecipes.push(recipeObject);
 
+    //add object to object array 
+    favouriteRecipesObject.push(recipeObject);
 
-    //let recipeObjectAsString = JSON.stringify(recipeObject);
-    //localStorage.setItem(`recipeObject${i}`,recipeObjectAsString)
-       // createFavouriteRecipe(recipeObject.title, recipeObject.image, recipeObject.url)
+    //convert object into string and add to string array 
+    let recipeObjectString = JSON.stringify(recipeObject)
+    favouriteRecipesString.push(recipeObjectString);
+
+    //when button is clicked clear local storage
+    localStorage.clear();
+    //clear cards already in favourite recipes 
+    removeCards('.favouriteRemove');
 
     //loop through array and for each recipe store in local storage 
-    for (let i = 0; i < favouriteRecipes.length; i++) {
-        console.log(favouriteRecipes[i])
+    for (let i = 0; i < favouriteRecipesObject.length; i++) {
+        //store string in local storage 
+        localStorage.setItem(`recipeObject${i}`, favouriteRecipesString[i])
+        //generate image in favourite modal
+        createFavouriteRecipe(favouriteRecipesObject[i].title, favouriteRecipesObject[i].image, favouriteRecipesObject[i].url)
     }
+
+    console.log(favouriteRecipesString, favouriteRecipesObject)
 }
 
 function createFavouriteRecipe(title, image, url) {
@@ -143,6 +155,7 @@ function createFavouriteRecipe(title, image, url) {
     const cardLink = document.createElement('a');
 
     card.classList.add('card');
+    card.classList.add('favouriteRemove');
     cardImage.classList.add('card-img-top');
     cardTitle.classList.add('card-title');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
