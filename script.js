@@ -6,16 +6,15 @@ button.addEventListener('click', getRecipes);
 //Set ingredient list 
 let ingredientList = '';
 
-//add ingredient button 
+//activate add ingredient button on enter key 
 document.addEventListener('keydown', (e) => {
     if (e.keyCode === 13) {
         concatonateIngredients();
     }
 })
-let addIngredient = document.querySelector('#add');
-addIngredient.addEventListener('click', concatonateIngredients);
 
-document.querySelector('#ingredient').value.textContent = 'wtf';
+const addIngredient = document.querySelector('#add');
+addIngredient.addEventListener('click', concatonateIngredients);
 
 function concatonateIngredients() {
     let ingredient = document.querySelector('#ingredient');
@@ -59,9 +58,7 @@ function createRecipeCard(title, image, url){
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
     cardHeartImage.classList.add('not-favourite');
 
-    cardHeartImage.addEventListener('click', (e)=> {
-        cardHeartImage.classList.toggle('favourite');
-    })
+    cardHeartImage.addEventListener('click', favouriteRecipe)
 
     card.append(cardImage);
     card.append(cardBody);
@@ -106,10 +103,30 @@ function createIngredientCard(ing) {
 }
 
 function removeIngredient() {
-    const ingredientContainer = document.querySelector('.ingredients');
+    console.log(this);
     let textToDelete = this.nextElementSibling.textContent;
-
     this.parentElement.remove();
-
     ingredientList = ingredientList.replace(`${textToDelete} `, '')
 }
+
+function favouriteRecipe() {
+    let title = (this.parentElement).querySelector('h5').textContent;
+    let image = (this.parentElement).querySelector('img').src;
+    let url = (this.parentElement).querySelector('a').href;
+    this.classList.toggle('favourite');
+    console.log(this.parentElement, title, image, url);
+}
+
+//local storage can only store strings
+let recipeObject = {
+    title: 'tracey',
+    image: 'help',
+    url: ''
+}
+
+let objectString = JSON.stringify(recipeObject);
+
+localStorage.setItem('object', objectString);
+
+let object_unstring = JSON.parse(localStorage.getItem('object'));
+console.log(objectString, object_unstring)
