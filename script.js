@@ -94,7 +94,8 @@ function createIngredientCard(ing) {
 function removeIngredient() {
     const ingredientContainer = document.querySelector('.ingredients');
     let textToDelete = this.nextElementSibling.textContent;
-    console.log(this.parentElement);
+
+    this.parentElement.remove();
+
     ingredientList = ingredientList.replace(`${textToDelete} `, '')
-    console.log(ingredientList)
 }
