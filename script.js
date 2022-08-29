@@ -121,10 +121,9 @@ function favouriteRecipe() {
         image: image,
         url: url
     }
+
     let recipeObjectAsString = JSON.stringify(recipeObject);
     localStorage.setItem('recipeObject', recipeObjectAsString);
-    let revertRecipeStringToNormal = JSON.parse(localStorage.getItem('recipeObject'));
-    console.log(revertRecipeStringToNormal);
 
     createFavouriteRecipe(recipeObject.title, recipeObject.image, recipeObject.url)
 }
@@ -138,7 +137,7 @@ function createFavouriteRecipe(title, image, url) {
     const cardTitle = document.createElement('h5');
     const cardLink = document.createElement('a');
 
-    card.classList.add('card', 'remove');
+    card.classList.add('card');
     cardImage.classList.add('card-img-top');
     cardTitle.classList.add('card-title');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
@@ -153,3 +152,8 @@ function createFavouriteRecipe(title, image, url) {
     cardLink.href =  url;
     cardLink.textContent = 'Get Recipe'
 }
+
+//load recipeObjects in local storage into favourite recipes 
+let recipeFavourite = localStorage.getItem('recipeObject');
+let revertRecipeStringToNormal = JSON.parse(localStorage.getItem('recipeObject'));
+createFavouriteRecipe(revertRecipeStringToNormal.title, revertRecipeStringToNormal.image, revertRecipeStringToNormal.url)
