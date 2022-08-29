@@ -116,6 +116,7 @@ function favouriteRecipe() {
     let image = (this.parentElement).querySelector('img').src;
     let url = (this.parentElement).querySelector('a').href;
     this.classList.toggle('favourite');
+    createFavouriteRecipe(title, image, url);
 
     const recipeObject = {
         title: title,
@@ -130,20 +131,8 @@ function favouriteRecipe() {
     let recipeObjectString = JSON.stringify(recipeObject)
     favouriteRecipesString.push(recipeObjectString);
 
-    //when button is clicked clear local storage
-    localStorage.clear();
-    //clear cards already in favourite recipes 
-    removeCards('.favouriteRemove');
-
-    //loop through array and for each recipe store in local storage 
-    for (let i = 0; i < favouriteRecipesObject.length; i++) {
-        //store string in local storage 
-        localStorage.setItem(`recipeObject${i}`, favouriteRecipesString[i])
-        //generate image in favourite modal
-        createFavouriteRecipe(favouriteRecipesObject[i].title, favouriteRecipesObject[i].image, favouriteRecipesObject[i].url)
-    }
-
-    console.log(favouriteRecipesString, favouriteRecipesObject)
+    //add to local storage 
+    localStorage.setItem(`${favouriteRecipesString.length - 1}`, recipeObjectString);
 }
 
 function createFavouriteRecipe(title, image, url) {
@@ -171,10 +160,15 @@ function createFavouriteRecipe(title, image, url) {
     cardLink.textContent = 'Get Recipe'
 }
 
-//load recipeObjects in local storage into favourite recipes 
-//get from local storage 
-let recipeFavourite = localStorage.getItem('recipeObject');
-//convert to normal object 
-let revertRecipeStringToNormal = JSON.parse(localStorage.getItem('recipeObject'));
-//generate image card in modal
-createFavouriteRecipe(revertRecipeStringToNormal.title, revertRecipeStringToNormal.image, revertRecipeStringToNormal.url)
+//load recipeObjects in local storage into favourite recipes modal
+for (let i = 0; i < localStorage.length; i++){
+    let key = localStorage.key(i);
+    //add this to string array 
+    favouriteRecipesString.push(localStorage.getItem(key));
+    //get current local storage string & convert to object
+    key = JSON.parse(localStorage.getItem(key));
+    //add to object array 
+    favouriteRecipesObject.push(localStorage.getItem(key));
+
+    createFavouriteRecipe(key.title, key.image, key.url);
+}
