@@ -55,6 +55,23 @@ header h1 {
     padding: 0 3rem 3rem 3rem;
     max-width: 70%;
     margin: 0 auto;
+    position: relative;
+}
+
+.not-favourite {   
+    position: absolute;
+    right: 0.8rem;
+    top: 0.7rem;
+    width: 1.25rem;   
+    content: url(images/love.png)
+}
+
+.favourite {
+    position: absolute;
+    right: 0.67rem;
+    top: 0.55rem;
+    width: 1.5rem;   
+    content: url(images/heart.png)
 }
 
 .btn {
@@ -62,7 +79,8 @@ header h1 {
 }
 
 .ingredient-container {
-    max-width: 80%;
+    width: 70%;
+    max-width: 60rem;
     margin: 0 auto;
     align-items: center;
     padding: 2rem;
@@ -81,7 +99,6 @@ header h1 {
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
-
 
 .ingredient-card {
     background-color: red;
@@ -107,3 +124,4 @@ header h1 {
 .btn-outline-secondary:hover, .btn-outline-secondary:focus {
     background-color: red;
 }
+

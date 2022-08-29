@@ -49,6 +49,7 @@ function createRecipeCard(title, image, url){
     const cardTitle = document.createElement('h5');
     const cardText = document.createElement('p');
     const cardLink = document.createElement('a');
+    const cardHeartImage = document.createElement('img')
 
     card.classList.add('card', 'remove');
     cardImage.classList.add('card-img-top');
@@ -56,15 +57,22 @@ function createRecipeCard(title, image, url){
     cardTitle.classList.add('card-title');
     cardText.classList.add('card-text');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
+    cardHeartImage.classList.add('not-favourite');
+
+    cardHeartImage.addEventListener('click', (e)=> {
+        cardHeartImage.classList.toggle('favourite');
+    })
 
     card.append(cardImage);
     card.append(cardBody);
     card.append(cardTitle);
     card.append(cardText);
     card.append(cardLink);
+    card.append(cardHeartImage);
     recipeContainer.append(card);
 
     cardTitle.textContent = title;
+    cardHeartImage.src='images/love.png';
     cardImage.src = image;
     cardLink.href =  url;
     cardLink.textContent = 'Get Recipe'
