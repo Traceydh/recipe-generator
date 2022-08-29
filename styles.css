@@ -11,12 +11,15 @@ body {
     max-width: 60%;
 }
 
+.card {
+    border-radius: 1.5rem;
+}
+
 #recipes .card {
     width: 20rem;
     padding: 2rem;
-    box-shadow: 10px 5px 5px grey;
+    box-shadow: 3px 3px 8px rgb(180, 144, 144);
     text-align: center;
-    border-radius: 1.5rem;
 }
 
 .card a {
@@ -30,9 +33,8 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 30vh;
+    height: 20vh;
     gap: 2.5rem;
-    margin-bottom: -1rem;
 }
 
 header h1 {
@@ -65,15 +67,19 @@ header h1 {
     align-items: center;
     padding: 2rem;
     justify-content: space-around;
+    margin-bottom: 3rem;
+    border-radius: 
 }
 
 .ingredients {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     gap: 2rem;
     justify-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 
@@ -96,4 +102,8 @@ header h1 {
 
 .remove-button:hover {
     color: rebeccapurple;
+}
+
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+    background-color: red;
 }

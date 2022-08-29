@@ -6,6 +6,12 @@ button.addEventListener('click', getRecipes);
 //Set ingredient list 
 let ingredientList = '';
 
+//add ingredient button 
+document.addEventListener('keydown', (e) => {
+    if (e.keyCode === 13) {
+        concatonateIngredients();
+    }
+})
 let addIngredient = document.querySelector('#add');
 addIngredient.addEventListener('click', concatonateIngredients);
 
@@ -49,7 +55,7 @@ function createRecipeCard(title, image, url){
     cardBody.classList.add('card-body');
     cardTitle.classList.add('card-title');
     cardText.classList.add('card-text');
-    cardLink.classList.add('btn-primary', 'btn');
+    cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
 
     card.append(cardImage);
     card.append(cardBody);
