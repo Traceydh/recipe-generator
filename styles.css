@@ -13,13 +13,13 @@ body {
 
 .card {
     border-radius: 1.5rem;
+    box-shadow: 3px 3px 8px rgb(180, 144, 144);
+    text-align: center;
 }
 
 #recipes .card {
     width: 20rem;
     padding: 2rem;
-    box-shadow: 3px 3px 8px rgb(180, 144, 144);
-    text-align: center;
 }
 
 .card a {
@@ -141,4 +141,28 @@ header h1 {
 }
 .heart {
     height: 1.5rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3rem;
+    gap: 2em;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.modal-body .card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 18rem;
+    height: 23rem;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 70%;
 }
