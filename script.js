@@ -11,6 +11,7 @@ addIngredient.addEventListener('click', concatonateIngredients);
 
 function concatonateIngredients() {
     let ingredient = document.querySelector('#ingredient').value;
+    createIngredientCard(ingredient);
     ingredientList += `${ingredient} `;
 }
 
@@ -65,4 +66,14 @@ function createRecipeCard(title, image, url){
 function removeCards() {
     let cards = document.querySelectorAll('.card');
     cards.forEach(card => card.remove());
+}
+
+function createIngredientCard(ing) {
+    const card = document.createElement('div');
+    const ingredientContainer = document.querySelector('.ingredients');
+    card.classList.add('ingredient-card');
+
+    ingredientContainer.append(card);
+    card.textContent = ing; 
+
 }
