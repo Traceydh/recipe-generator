@@ -14,8 +14,8 @@ document.querySelector('#ingredient').value.textContent = 'wtf';
 function concatonateIngredients() {
     let ingredient = document.querySelector('#ingredient');
     createIngredientCard(ingredient.value);
+    ingredientList += `${ingredient.value} `;
     ingredient.value = '';
-    ingredientList += `${ingredient} `;
 }
 
 //API
@@ -24,9 +24,7 @@ const APP_KEYS = '1ace64e82efde8a6cdfceeaee1b79d84';
 const URL = `https://api.edamam.com/api/recipes/v2?type=public&q=`;
 
 function getRecipes() {
-    let ingredient = document.querySelector('#ingredient').value;
-
-    fetch(`${URL}${ingredient}&app_id=${APP_ID}&app_key=${APP_KEYS}`)
+    fetch(`${URL}${ingredientList}&app_id=${APP_ID}&app_key=${APP_KEYS}`)
 	.then(response => response.json())
 	.then(data => {
         console.log(data)
@@ -46,7 +44,7 @@ function createRecipeCard(title, image, url){
     const cardText = document.createElement('p');
     const cardLink = document.createElement('a');
 
-    card.classList.add('card');
+    card.classList.add('card', 'remove');
     cardImage.classList.add('card-img-top');
     cardBody.classList.add('card-body');
     cardTitle.classList.add('card-title');
@@ -67,8 +65,12 @@ function createRecipeCard(title, image, url){
 }
 
 function removeCards() {
-    let cards = document.querySelectorAll('.card');
+    let cards = document.querySelectorAll('.remove');
     cards.forEach(card => card.remove());
+
+    ingredientList = '';
+
+    
 }
 
 function createIngredientCard(ing) {
@@ -78,5 +80,4 @@ function createIngredientCard(ing) {
 
     ingredientContainer.append(card);
     card.textContent = ing; 
-
 }
