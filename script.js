@@ -2,7 +2,7 @@
 let favouriteRecipesObject = [];
 let favouriteRecipesString = [];
 
-//Select button 
+//get recipes SEARCH button 
 let button = document.querySelector('#find');
 const recipeContainer = document.querySelector('#recipes');
 button.addEventListener('click', getRecipes);
@@ -53,9 +53,21 @@ function getRecipes() {
         removeCards('.remove');
         for (let i = 0; i < data.hits.length; i++) {
             createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url)
+            for (let j = 0; j < localStorage.length; j ++) {
+                checkIfFavouriteRecipe(data.hits[i], j);
+            }
         }
     })
 	.catch(err => console.error(err));
+}
+
+function checkIfFavouriteRecipe(data, i) {
+    let favRecipeObject = JSON.parse(localStorage.getItem(i));
+    const recipeContainer = document.querySelector('#recipes');
+    if (favRecipeObject.title === data.recipe.label) {
+        let favouritedRecipe = recipeContainer.querySelectorAll('img');
+        favouritedRecipe[favouritedRecipe.length-1].classList.add('favourite');
+    }
 }
 
 function createRecipeCard(title, image, url){
