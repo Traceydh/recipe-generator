@@ -87,7 +87,7 @@ function createRecipeCard(title, image, url){
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
     cardHeartImage.classList.add('not-favourite');
 
-    cardHeartImage.addEventListener('click', favouriteRecipe)
+    cardHeartImage.addEventListener('click', addFavouriteRecipeToStorageAndModal)
 
     card.append(cardImage);
     card.append(cardBody);
@@ -137,28 +137,43 @@ function removeIngredient() {
     ingredientList = ingredientList.replace(`${textToDelete} `, '')
 }
 
-function favouriteRecipe() {
-    let title = (this.parentElement).querySelector('h5').textContent;
-    let image = (this.parentElement).querySelector('img').src;
-    let url = (this.parentElement).querySelector('a').href;
-    this.classList.toggle('favourite');
-    createFavouriteRecipe(title, image, url);
+function addFavouriteRecipeToStorageAndModal() {
 
-    const recipeObject = {
-        title: title,
-        image: image,
-        url: url
+    if (this.classList.contains('favourite')) {
+        const userWantsToUnfavouriteRecipe = this.parentElement.querySelector('.card-title').innerText
+        //remove from localStorage 
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            let recipeObject = JSON.parse(localStorage.getItem(key));
+            if (userWantsToUnfavouriteRecipe === recipeObject.title) {
+                localStorage.removeItem(key);
+            }   
+        }
+        //remove from favourite recipes modal 
+    } else {
+        console.log('where')
+        let title = (this.parentElement).querySelector('h5').textContent;
+        let image = (this.parentElement).querySelector('img').src;
+        let url = (this.parentElement).querySelector('a').href;
+        createFavouriteRecipe(title, image, url);
+    
+        const recipeObject = {
+            title: title,
+            image: image,
+            url: url
+        }
+    
+        //add object to object array 
+        favouriteRecipesObject.push(recipeObject);
+    
+        //convert object into string and add to string array 
+        let recipeObjectString = JSON.stringify(recipeObject)
+        favouriteRecipesString.push(recipeObjectString);
+    
+        //add to local storage 
+        localStorage.setItem(`${favouriteRecipesString.length - 1}`, recipeObjectString);
     }
-
-    //add object to object array 
-    favouriteRecipesObject.push(recipeObject);
-
-    //convert object into string and add to string array 
-    let recipeObjectString = JSON.stringify(recipeObject)
-    favouriteRecipesString.push(recipeObjectString);
-
-    //add to local storage 
-    localStorage.setItem(`${favouriteRecipesString.length - 1}`, recipeObjectString);
+    this.classList.toggle('favourite');
 }
 
 function createFavouriteRecipe(title, image, url) {
