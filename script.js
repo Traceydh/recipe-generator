@@ -20,6 +20,20 @@ document.addEventListener('keydown', (e) => {
 const addIngredient = document.querySelector('#add');
 addIngredient.addEventListener('click', concatonateIngredients);
 
+//load recipeObjects in local storage into favourite recipes modal
+for (let i = 0; i < localStorage.length; i++){
+    let key = localStorage.key(i);
+    //add this to string array 
+    favouriteRecipesString.push(localStorage.getItem(key));
+    //get current local storage string & convert to object
+    key = JSON.parse(localStorage.getItem(key));
+    //add to object array 
+    favouriteRecipesObject.push(localStorage.getItem(key));
+
+    createFavouriteRecipe(key.title, key.image, key.url);
+}
+
+
 function concatonateIngredients() {
     let ingredient = document.querySelector('#ingredient');
     createIngredientCard(ingredient.value);
@@ -160,15 +174,3 @@ function createFavouriteRecipe(title, image, url) {
     cardLink.textContent = 'Get Recipe'
 }
 
-//load recipeObjects in local storage into favourite recipes modal
-for (let i = 0; i < localStorage.length; i++){
-    let key = localStorage.key(i);
-    //add this to string array 
-    favouriteRecipesString.push(localStorage.getItem(key));
-    //get current local storage string & convert to object
-    key = JSON.parse(localStorage.getItem(key));
-    //add to object array 
-    favouriteRecipesObject.push(localStorage.getItem(key));
-
-    createFavouriteRecipe(key.title, key.image, key.url);
-}
