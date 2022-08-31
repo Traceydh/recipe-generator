@@ -153,15 +153,10 @@ function favouriteThisRecipe() {
 displayFavouriteRecipes()
 //load display on refresh for favourite recipes in modal 
 function displayFavouriteRecipes() {
-    for (let i = 0; i < localStorage.length; i++){
+    const modalContainer = document.querySelector('.modal-body');
+    for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
-        //add this to string array 
-        favouriteRecipesString.push(localStorage.getItem(key));
-        //get current local storage string & convert to object
-        key = JSON.parse(localStorage.getItem(key));
-        //add to object array 
-        favouriteRecipesObject.push(localStorage.getItem(key));
-
-        createFavouriteRecipe(key.title, key.image, key.url);
+        let data = JSON.parse(localStorage.getItem(key));
+        createRecipeCard(data.title, data.image, data.url, modalContainer, false);
     }
 }
