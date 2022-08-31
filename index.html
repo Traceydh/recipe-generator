@@ -28,23 +28,28 @@
           <h1>Can't decide what to cook ?</h1>
         </header>
 
+        <!-- Button trigger modal -->
+        <button id="btn" type="button" class="btn btn-primary fav btn-success" data-toggle="modal" data-target="#exampleModal">
+            <div class="container">
+                <div class="full-text"> Favourite Recipes</div>
+                <img class="heart" src="images/heart.png">
+            </div>
+        </button>
         <section>
-            <!-- Button trigger modal -->
-            <button id="btn" type="button" class="btn btn-primary fav btn-success" data-toggle="modal" data-target="#exampleModal">
-                <div class="container">
-                    <div> Favourite Recipes</div>
-                    <img class="heart" src="images/heart.png">
-                </div>
-              </button>
-              
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-xl" style="margin: 5% auto;">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Favourite Recipes</h5>
+                      <button type="button" class="close btn-success" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
                     <div class="modal-body" id="modal-width"></div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-success" data-dismiss="modal">Close</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -53,8 +58,8 @@
         <section class="card ingredient-container">
           <h2>Pantry</h2>
           <br>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Add an ingredient" aria-label="Recipient's username" aria-describedby="button-addon2" id="ingredient" name="ingredient">
+            <div class="input-group mb-3 w-100">
+                <input type="text" class="form-control" placeholder="Ingredient" aria-label="Recipient's username" aria-describedby="button-addon2" id="ingredient" name="ingredient">
                 <button class="btn btn-outline-secondary btn-success" type="button" id="add">Add</button>
             </div>
             <div class="ingredients">
