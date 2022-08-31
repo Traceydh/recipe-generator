@@ -2,14 +2,22 @@
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
+:root {
+    --dark: #1E6F5C;
+    --green: #29BB89;
+    --offwhite: #F8EDE3;
+    --text: black;
+    --shadow: #dfe0df;
+    --textlight: white;
+  }
 
-body {
-    background-color: #f4c5cc;
+body, .modal-content{
+    background-color: var(--offwhite);
 }
 
-:root {
-    --dark: black;
-  }
+.modal-content {
+    margin: 10%;
+}
 
 .input-group {
     max-width: 60%;
@@ -17,7 +25,7 @@ body {
 
 .card {
     border-radius: 1.5rem;
-    box-shadow: 3px 3px 8px rgb(180, 144, 144);
+    box-shadow: 3px 3px 5px var(--shadow);
     text-align: center;
 }
 
@@ -36,13 +44,15 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20vh;
-    gap: 2.5rem;
+    margin-bottom: 10%;
+    background-color: var(--dark);
+    color: var(--textlight);
+    text-align: center;
 }
 
 header h1 {
     font-weight: 600;
-    font-size: 2.8rem;
+    font-size: 2rem;
 }
 
 .form-control {
@@ -127,9 +137,10 @@ header h1 {
     color: rebeccapurple;
 }
 
-.btn:hover, .btn-outline-secondary:focus {
-    background-color: red;
+.btn:hover, .btn-outline-secondary:focus, #btn:focus {
+    background-color: var(--green);
 }
+
 
 /*MODALLLL*/
 .fav {
@@ -169,21 +180,16 @@ header h1 {
     transition: 500ms;
 }
 
-@media (min-width: 576px) {
-    .modal-dialog {
-        max-width: 70%;
-}
-
 footer {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--dark);
-    color: white;
+    color: var(--textlight);;
 }
 
 a {
-    color: white;
+    color: var(--textlight);
     text-decoration: none;
 }
 

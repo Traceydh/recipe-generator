@@ -25,12 +25,12 @@
     <body>
       <div class="page-container">
         <header>
-          <h1>What's for dinner?</h1>
+          <h1>Can't decide what to cook ?</h1>
         </header>
 
         <section>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary fav" data-toggle="modal" data-target="#exampleModal">
+            <button id="btn" type="button" class="btn btn-primary fav btn-success" data-toggle="modal" data-target="#exampleModal">
                 <div class="container">
                     <div> Favourite Recipes</div>
                     <img class="heart" src="images/heart.png">
@@ -51,16 +51,16 @@
         </section>
 
         <section class="card ingredient-container">
-          <h2>What's in your fridge?</h2>
+          <h2>Pantry</h2>
           <br>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="ingredient" aria-label="Recipient's username" aria-describedby="button-addon2" id="ingredient" name="ingredient">
-                <button class="btn btn-outline-secondary" type="button" id="add">Add</button>
+                <input type="text" class="form-control" placeholder="Add an ingredient" aria-label="Recipient's username" aria-describedby="button-addon2" id="ingredient" name="ingredient">
+                <button class="btn btn-outline-secondary btn-success" type="button" id="add">Add</button>
             </div>
             <div class="ingredients">
 
             </div>
-            <button id="find" class="btn btn-outline-secondary">Search</button>
+            <button id="find" class="btn btn-outline-secondary btn-success">Search Recipes</button>
         </section>
 
         <section>
