@@ -81,6 +81,7 @@ function createRecipeCard(title, image, url, container, heart){
     const cardTitle = document.createElement('h5');
     const cardText = document.createElement('p');
     const cardLink = document.createElement('a');
+    const cardHeartImage = document.createElement('img')
 
     card.classList.add('card');
     cardImage.classList.add('card-img-top');
@@ -88,6 +89,7 @@ function createRecipeCard(title, image, url, container, heart){
     cardTitle.classList.add('card-title');
     cardText.classList.add('card-text');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
+    cardHeartImage.classList.add('not-favourite');
     card.dataset.title = title;
 
     card.append(cardImage);
@@ -95,27 +97,24 @@ function createRecipeCard(title, image, url, container, heart){
     card.append(cardTitle);
     card.append(cardText);
     card.append(cardLink);
+    card.append(cardHeartImage);
     container.append(card);
 
     cardTitle.textContent = title;
 
     cardImage.src = image;
     cardLink.href =  url;
-    cardLink.textContent = 'Get Recipe'
+    cardLink.textContent = 'Get Recipe';
+    cardHeartImage.src='images/love.png';
 
-    //for modal cards don't include heart 
-    //this is for recipes in main container 
+    cardHeartImage.addEventListener('click', favouriteThisRecipe)
+
+    //if recipe title is equal to a title in local storage add favourite class 
+    addFavourite(title, cardHeartImage);
+
+    //this is for recipes in main container, gets clear when search is pressed 
     if (heart == true) {
-        const cardHeartImage = document.createElement('img')
-        cardHeartImage.classList.add('not-favourite');
         card.classList.add('remove');
-
-        card.append(cardHeartImage);
-        cardHeartImage.src='images/love.png';
-        cardHeartImage.addEventListener('click', favouriteThisRecipe)
-
-        //if recipe title is equal to a title in local storage add favourite class 
-        addFavourite(title, cardHeartImage);
     }
 
 }
@@ -135,10 +134,7 @@ function favouriteThisRecipe() {
     this.classList.toggle('favourite');
 
     if (this.classList.contains('favourite')) {
-        //add recipe to modal display
-        createRecipeCard(title, image, url, modalContainer, false);
-
-        //add recipe into local storage
+       //add recipe into local storage
         const favouriteRecipeObject = {
             title: title,
             image: image,
@@ -148,6 +144,9 @@ function favouriteThisRecipe() {
         let favouriteRecipeObjectString = JSON.stringify(favouriteRecipeObject);
         //store string in local storage 
         localStorage.setItem(title, favouriteRecipeObjectString)
+        
+        //add recipe to modal display
+        createRecipeCard(title, image, url, modalContainer, false);
     } else {
         //remove from local 
         localStorage.removeItem(title);
