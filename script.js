@@ -67,7 +67,7 @@ function fetchRecipes() {
         //clear previous data each time
         removeRecipeCardsDisplay('.remove');
         for (let i = 0; i < data.hits.length; i++) {
-            createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url, recipeContainer, false);
+            createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url, recipeContainer, true);
         }
     })
 	.catch(err => console.error(err));
@@ -108,7 +108,6 @@ function createRecipeCard(title, image, url, container, heart){
         card.append(cardHeartImage);
         cardHeartImage.src='images/love.png';
         cardHeartImage.addEventListener('click', favouriteThisRecipe)
-
     }
 
 }
@@ -130,7 +129,7 @@ function favouriteThisRecipe() {
 
     if (this.classList.contains('favourite')) {
         //add recipe to modal display
-        createRecipeCard(title, image, url, modalContainer, true);
+        createRecipeCard(title, image, url, modalContainer, false);
 
         //add recipe into local storage
         const favouriteRecipeObject = {
