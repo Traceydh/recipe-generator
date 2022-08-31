@@ -1,5 +1,6 @@
 addIngredientButton()
 searchRecipesButton()
+displayFavouriteRecipes()
 
 let ingredientList = '';
 
@@ -81,7 +82,7 @@ function createRecipeCard(title, image, url, container, heart){
     const cardText = document.createElement('p');
     const cardLink = document.createElement('a');
 
-    card.classList.add('card', 'remove');
+    card.classList.add('card');
     cardImage.classList.add('card-img-top');
     cardBody.classList.add('card-body');
     cardTitle.classList.add('card-title');
@@ -101,9 +102,12 @@ function createRecipeCard(title, image, url, container, heart){
     cardLink.href =  url;
     cardLink.textContent = 'Get Recipe'
 
+    //for modal cards don't include heart 
+    //this is for recipes in main container 
     if (heart == true) {
         const cardHeartImage = document.createElement('img')
         cardHeartImage.classList.add('not-favourite');
+        card.classList.add('remove');
         card.dataset.title = title;
         card.append(cardHeartImage);
         cardHeartImage.src='images/love.png';
@@ -125,7 +129,6 @@ function favouriteThisRecipe() {
     let url = (this.parentElement).querySelector('a').href;
 
     this.classList.toggle('favourite');
-    console.log(this.parentElement)
 
     if (this.classList.contains('favourite')) {
         //add recipe to modal display
@@ -150,7 +153,7 @@ function favouriteThisRecipe() {
 
     }
 }
-displayFavouriteRecipes()
+
 //load display on refresh for favourite recipes in modal 
 function displayFavouriteRecipes() {
     const modalContainer = document.querySelector('.modal-body');
