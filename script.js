@@ -115,8 +115,9 @@ function createRecipeCard(title, image, url, container, heart){
         cardHeartImage.addEventListener('click', favouriteThisRecipe)
 
         //if recipe title is equal to a title in local storage add favourite class 
-        addFavourite(title);
+        addFavourite(title, cardHeartImage);
     }
+
 }
 
 function removeRecipeCardsDisplay(remove) {
@@ -168,12 +169,12 @@ function displayFavouriteRecipes() {
     }
 }
 
-function addFavourite(title) {
+function addFavourite(title, image) {
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         let data = JSON.parse(localStorage.getItem(key));
         if (data.title == title) {
-            cardHeartImage.classList.add('favourite');
+            image.classList.add('favourite');
         }
     }
 }

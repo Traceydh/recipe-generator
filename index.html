@@ -23,54 +23,60 @@
     </head>
 
     <body>
-            <header>
-                <h1>What's for dinner?</h1>
-            </header>
+      <div class="page-container">
+        <header>
+          <h1>What's for dinner?</h1>
+        </header>
 
-            <section>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary fav" data-toggle="modal" data-target="#exampleModal">
-                    <div class="container">
-                        <div> Favourite Recipes</div>
-                        <img class="heart" src="images/heart.png">
+        <section>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary fav" data-toggle="modal" data-target="#exampleModal">
+                <div class="container">
+                    <div> Favourite Recipes</div>
+                    <img class="heart" src="images/heart.png">
+                </div>
+              </button>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Favourite Recipes</h5>
                     </div>
-                  </button>
-                  
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Favourite Recipes</h5>
-                        </div>
-                        <div class="modal-body" id="modal-width"></div>
-                      </div>
-                    </div>
+                    <div class="modal-body" id="modal-width"></div>
                   </div>
-
-            </section>
-
-            <section class="card ingredient-container">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="ingredient" aria-label="Recipient's username" aria-describedby="button-addon2" id="ingredient" name="ingredient">
-                    <button class="btn btn-outline-secondary" type="button" id="add">Add</button>
                 </div>
-                <div class="ingredients">
+              </div>
+        </section>
 
-                </div>
-                <button id="find" class="btn btn-outline-secondary">Search</button>
-            </section>
+        <section class="card ingredient-container">
+          <h2>What's in your fridge?</h2>
+          <br>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="ingredient" aria-label="Recipient's username" aria-describedby="button-addon2" id="ingredient" name="ingredient">
+                <button class="btn btn-outline-secondary" type="button" id="add">Add</button>
+            </div>
+            <div class="ingredients">
 
-            <section>
-                 <div id="recipes" class="recipe-container"></div>
-            </section>
+            </div>
+            <button id="find" class="btn btn-outline-secondary">Search</button>
+        </section>
 
-        <footer></footer>
+        <section>
+            <div id="recipes" class="recipe-container"></div>
+        </section>
 
-        <!--Bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <footer>
+          <div>By Traceydh | Check out the code <a href="https://github.com/Traceydh/recipe-generator">here</a></div>
+        </footer>
+
+      </div>
+
+      <!--Bootstrap -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
     </body>
 </html>

@@ -7,6 +7,10 @@ body {
     background-color: #f4c5cc;
 }
 
+:root {
+    --dark: black;
+  }
+
 .input-group {
     max-width: 60%;
 }
@@ -168,4 +172,29 @@ header h1 {
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 70%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark);
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
 }
