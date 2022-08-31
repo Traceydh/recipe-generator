@@ -158,11 +158,9 @@ header h1 {
     gap: 0.25rem;
     display: flex;
     flex-direction: column;
-    width: 18rem;
-    height: 23rem;
 }
 
-.remove:hover {
+#recipes .card:hover, .modal-body .card:hover {
     transform: scale(1.03);
     transition: 500ms;
 }
