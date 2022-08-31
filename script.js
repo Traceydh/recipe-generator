@@ -88,6 +88,7 @@ function createRecipeCard(title, image, url, container, heart){
     cardTitle.classList.add('card-title');
     cardText.classList.add('card-text');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
+    card.dataset.title = title;
 
     card.append(cardImage);
     card.append(cardBody);
@@ -108,12 +109,14 @@ function createRecipeCard(title, image, url, container, heart){
         const cardHeartImage = document.createElement('img')
         cardHeartImage.classList.add('not-favourite');
         card.classList.add('remove');
-        card.dataset.title = title;
+
         card.append(cardHeartImage);
         cardHeartImage.src='images/love.png';
         cardHeartImage.addEventListener('click', favouriteThisRecipe)
-    }
 
+        //if recipe title is equal to a title in local storage add favourite class 
+        addFavourite(title);
+    }
 }
 
 function removeRecipeCardsDisplay(remove) {
@@ -156,10 +159,21 @@ function favouriteThisRecipe() {
 
 //load display on refresh for favourite recipes in modal 
 function displayFavouriteRecipes() {
+    //get from local storage and display in modal 
     const modalContainer = document.querySelector('.modal-body');
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         let data = JSON.parse(localStorage.getItem(key));
         createRecipeCard(data.title, data.image, data.url, modalContainer, false);
+    }
+}
+
+function addFavourite(title) {
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        let data = JSON.parse(localStorage.getItem(key));
+        if (data.title == title) {
+            cardHeartImage.classList.add('favourite');
+        }
     }
 }
