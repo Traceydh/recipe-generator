@@ -59,6 +59,7 @@ function fetchRecipes() {
     const APP_ID = '23647cb2';
     const APP_KEYS = '1ace64e82efde8a6cdfceeaee1b79d84';
     const URL = `https://api.edamam.com/api/recipes/v2?type=public&q=`;
+    const recipeContainer = document.querySelector('#recipes');
 
     fetch(`${URL}${ingredientList}&app_id=${APP_ID}&app_key=${APP_KEYS}`)
 	.then(response => response.json())
@@ -66,14 +67,13 @@ function fetchRecipes() {
         //clear previous data each time
         removeRecipeCardsDisplay('.remove');
         for (let i = 0; i < data.hits.length; i++) {
-            createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url);
+            createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url, recipeContainer);
         }
     })
 	.catch(err => console.error(err));
 }
 
-function createRecipeCard(title, image, url){
-    const recipeContainer = document.querySelector('#recipes');
+function createRecipeCard(title, image, url, container){
     const card = document.createElement('div');
     const cardImage = document.createElement('img');
     const cardBody = document.createElement('div');
@@ -89,6 +89,7 @@ function createRecipeCard(title, image, url){
     cardText.classList.add('card-text');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
     cardHeartImage.classList.add('not-favourite');
+    card.dataset.title = title;
 
     card.append(cardImage);
     card.append(cardBody);
@@ -96,7 +97,7 @@ function createRecipeCard(title, image, url){
     card.append(cardText);
     card.append(cardLink);
     card.append(cardHeartImage);
-    recipeContainer.append(card);
+    container.append(card);
 
     cardTitle.textContent = title;
     cardHeartImage.src='images/love.png';
@@ -114,7 +115,41 @@ function removeRecipeCardsDisplay(remove) {
 
 //store favourite recipes in local storage & display 
 function favouriteThisRecipe() {
+    const modalContainer = document.querySelector('.modal-body');
+    let title = (this.parentElement).querySelector('h5').textContent;
+    let image = (this.parentElement).querySelector('img').src;
+    let url = (this.parentElement).querySelector('a').href;
+
     this.classList.toggle('favourite');
+    console.log(this.parentElement)
+
+    if (this.classList.contains('favourite')) {
+        //add recipe to modal display
+        createRecipeCard(title, image, url, modalContainer);
+
+        //add recipe into local storage
+        const favouriteRecipeObject = {
+            title: title,
+            image: image,
+            url: url
+        }
+        //turn object into string
+        let favouriteRecipeObjectString = JSON.stringify(favouriteRecipeObject);
+        //store string in local storage 
+        localStorage.setItem(title, favouriteRecipeObjectString)
+    } else {
+        //remove from local 
+        localStorage.removeItem(title);
+        //remove from display 
+        console.log(title);
+        modalContainer.querySelector(`[data-title="${title}"]`).remove()
+        
+        //give each newly created card a unique data attribute 
+        //use this to select and remove 
+
+    }
+
+
 }
 //when user clicks heart 
 //change display of heart to red 
@@ -122,9 +157,7 @@ function favouriteThisRecipe() {
 //add recipe into local storage
 
 //when uesr clicks heart again
-//change display to black
-//remove from local 
-//remove from display 
+
 
 //when user leaves website 
 //heart class is added to favourited recipes
