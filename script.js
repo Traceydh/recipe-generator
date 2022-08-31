@@ -88,7 +88,7 @@ function createRecipeCard(title, image, url){
     cardTitle.classList.add('card-title');
     cardText.classList.add('card-text');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
-    //cardHeartImage.classList.add('not-favourite');
+    cardHeartImage.classList.add('not-favourite');
 
     card.append(cardImage);
     card.append(cardBody);
@@ -114,7 +114,7 @@ function removeRecipeCardsDisplay(remove) {
 
 //store favourite recipes in local storage & display 
 function favouriteThisRecipe() {
-    
+    this.classList.toggle('favourite');
 }
 //when user clicks heart 
 //change display of heart to red 
@@ -125,3 +125,7 @@ function favouriteThisRecipe() {
 //change display to black
 //remove from local 
 //remove from display 
+
+//when user leaves website 
+//heart class is added to favourited recipes
+//load favourite recipes in modal 

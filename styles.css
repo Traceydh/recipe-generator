@@ -162,6 +162,11 @@ header h1 {
     height: 23rem;
 }
 
+.remove:hover {
+    transform: scale(1.05);
+    transition: 500ms;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 70%;
