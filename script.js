@@ -144,16 +144,22 @@ function favouriteThisRecipe() {
         let favouriteRecipeObjectString = JSON.stringify(favouriteRecipeObject);
         //store string in local storage 
         localStorage.setItem(title, favouriteRecipeObjectString)
-        
+
         //add recipe to modal display
         createRecipeCard(title, image, url, modalContainer, false);
     } else {
         //remove from local 
         localStorage.removeItem(title);
         //remove from display 
-        console.log(title);
         modalContainer.querySelector(`[data-title="${title}"]`).remove()
-
+        //remove heart from main recipe container 
+        const allTitles = document.querySelectorAll('.card-title');
+        for (let i = 0; i < allTitles.length; i++) {
+            if (title == allTitles[i].innerText) {
+                allTitles[i].parentElement.lastChild.classList.remove('favourite');
+                console.log(allTitles[i].parentElement.lastChild)
+            }
+        }
     }
 }
 
