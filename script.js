@@ -67,20 +67,19 @@ function fetchRecipes() {
         //clear previous data each time
         removeRecipeCardsDisplay('.remove');
         for (let i = 0; i < data.hits.length; i++) {
-            createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url, recipeContainer);
+            createRecipeCard(data.hits[i].recipe.label, data.hits[i].recipe.image, data.hits[i].recipe.url, recipeContainer, false);
         }
     })
 	.catch(err => console.error(err));
 }
 
-function createRecipeCard(title, image, url, container){
+function createRecipeCard(title, image, url, container, heart){
     const card = document.createElement('div');
     const cardImage = document.createElement('img');
     const cardBody = document.createElement('div');
     const cardTitle = document.createElement('h5');
     const cardText = document.createElement('p');
     const cardLink = document.createElement('a');
-    const cardHeartImage = document.createElement('img')
 
     card.classList.add('card', 'remove');
     cardImage.classList.add('card-img-top');
@@ -88,24 +87,30 @@ function createRecipeCard(title, image, url, container){
     cardTitle.classList.add('card-title');
     cardText.classList.add('card-text');
     cardLink.classList.add('btn-primary', 'btn', 'btn-outline-secondary');
-    cardHeartImage.classList.add('not-favourite');
-    card.dataset.title = title;
 
     card.append(cardImage);
     card.append(cardBody);
     card.append(cardTitle);
     card.append(cardText);
     card.append(cardLink);
-    card.append(cardHeartImage);
     container.append(card);
 
     cardTitle.textContent = title;
-    cardHeartImage.src='images/love.png';
+
     cardImage.src = image;
     cardLink.href =  url;
     cardLink.textContent = 'Get Recipe'
 
-    cardHeartImage.addEventListener('click', favouriteThisRecipe)
+    if (heart == true) {
+        const cardHeartImage = document.createElement('img')
+        cardHeartImage.classList.add('not-favourite');
+        card.dataset.title = title;
+        card.append(cardHeartImage);
+        cardHeartImage.src='images/love.png';
+        cardHeartImage.addEventListener('click', favouriteThisRecipe)
+
+    }
+
 }
 
 function removeRecipeCardsDisplay(remove) {
@@ -125,7 +130,7 @@ function favouriteThisRecipe() {
 
     if (this.classList.contains('favourite')) {
         //add recipe to modal display
-        createRecipeCard(title, image, url, modalContainer);
+        createRecipeCard(title, image, url, modalContainer, true);
 
         //add recipe into local storage
         const favouriteRecipeObject = {
@@ -143,22 +148,21 @@ function favouriteThisRecipe() {
         //remove from display 
         console.log(title);
         modalContainer.querySelector(`[data-title="${title}"]`).remove()
-        
-        //give each newly created card a unique data attribute 
-        //use this to select and remove 
 
     }
-
-
 }
-//when user clicks heart 
-//change display of heart to red 
-//add recipe card into modal 
-//add recipe into local storage
+displayFavouriteRecipes()
+//load display on refresh for favourite recipes in modal 
+function displayFavouriteRecipes() {
+    for (let i = 0; i < localStorage.length; i++){
+        let key = localStorage.key(i);
+        //add this to string array 
+        favouriteRecipesString.push(localStorage.getItem(key));
+        //get current local storage string & convert to object
+        key = JSON.parse(localStorage.getItem(key));
+        //add to object array 
+        favouriteRecipesObject.push(localStorage.getItem(key));
 
-//when uesr clicks heart again
-
-
-//when user leaves website 
-//heart class is added to favourited recipes
-//load favourite recipes in modal 
+        createFavouriteRecipe(key.title, key.image, key.url);
+    }
+}
